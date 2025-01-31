@@ -51,4 +51,41 @@ window.addEventListener('DOMContentLoaded', event => {
         });
     });
 
+    // Send data to FormSpark with AJAX after submission (and don't redirect to their page):
+    document.getElementById("contactForm").addEventListener("submit", async function (event) {
+        event.preventDefault(); // Prevent default form submission
+    
+        const form = event.target;
+        const formData = new FormData(form);
+        let formObject = {};
+        formData.forEach((value, key) => {
+            formObject[key] = value;
+        });
+        console.log(formObject)
+
+        try {
+            const response = await fetch("https://submit-form.com/Md0m0QflH", {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                  Accept: "application/json",
+                },
+                body: JSON.stringify(formObject),
+            });
+    
+            if (response.ok) {
+                console.log("Form submitted successfully!");
+                document.getElementById("submitSuccessMessage").classList.remove("d-none");
+                form.reset(); // Reset form fields
+            } else {
+                console.error("Form submission failed!");
+                document.getElementById("submitErrorMessage").classList.remove("d-none");
+            }
+        } catch (error) {
+            console.error("Error:", error);
+            document.getElementById("submitErrorMessage").classList.remove("d-none");
+        }
+    
+    });
+
 });
