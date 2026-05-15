@@ -104,6 +104,13 @@ body {
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
+p {
+  font-family: Optima, sans-serif;
+  font-size: 1.15rem;
+  text-align: justify;
+  line-height: 1.4 !important;
+}
+
 hr {
   margin: 1rem 0;
   color: inherit;
